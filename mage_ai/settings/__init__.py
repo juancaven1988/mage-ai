@@ -19,6 +19,8 @@ except ValueError:
     DISABLE_NOTEBOOK_EDIT_ACCESS = 1 if os.getenv('DISABLE_NOTEBOOK_EDIT_ACCESS') else 0
 
 
+
+
 def is_disable_pipeline_edit_access():
     return DISABLE_NOTEBOOK_EDIT_ACCESS >= 1
 
@@ -27,10 +29,18 @@ def is_disable_pipeline_edit_access():
 
 DISABLE_TERMINAL = os.getenv('DISABLE_TERMINAL', '0').lower() in ('true', '1', 't')
 
+#------------------------- DISABLE TERMINAL ----------------------#'
+
+DISABLE_TERMINAL = os.getenv('DISABLE_TERMINAL', '0').lower() in ('true', '1', 't')
+
 # ----------------- Authentication settings ----------------
 REQUIRE_USER_AUTHENTICATION = \
     os.getenv('REQUIRE_USER_AUTHENTICATION', 'False').lower() in ('true', '1', 't')
 AUTHENTICATION_MODE = os.getenv('AUTHENTICATION_MODE', 'LOCAL')
+try:
+    MAGE_ACCESS_TOKEN_EXPIRY_TIME = int(os.getenv('MAGE_ACCESS_TOKEN_EXPIRY_TIME', 3600))  
+except ValueError:
+    MAGE_ACCESS_TOKEN_EXPIRY_TIME = 3600 
 LDAP_SERVER = os.getenv('LDAP_SERVER', 'ldaps://127.0.0.1:1636')
 LDAP_BIND_DN = os.getenv('LDAP_BIND_DN', 'cd=admin,dc=example,dc=org')
 LDAP_BIND_PASSWORD = os.getenv('LDAP_BIND_PASSWORD', 'admin_password')
